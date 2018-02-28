@@ -2,20 +2,20 @@
 
 mxjson is a C based JSON parser implemented as a header-only library.
 The design and approach of mxjson is inspired by JSMN
-(https://github.com/zserge/jsmn),
-Both mxjson and JSMN have a focus on parsing the JSON input into a form
-suitable for an application to interpret and translate.
+(https://github.com/zserge/jsmn). mxjson provides a simple JSON parsing
+API, presenting a hierarchical view of the parsed JSON for an application
+to traverse, interpret and translate.
 
 mxjson is distributed under the MIT License.
 
-## Comparison with JSMN
+## Features
 
-The differences with JSMN are:
+The main features of mxjson are:
  * mxjson is implemented as a header-only library.
  * Strict validation of the JSON input against RFC-8295
    (https://tools.ietf.org/html/rfc8259)
- * Less focus on support for embedded systems.
- * Automatic resizing of the token array.
+ * Portable, with minimal external dependencies.
+ * Automatic memory management for the token array.
  * An object member name/value pair is stored as a single token.
  * Support for interpreting/translating JSON strings that contain escape
    characters.
