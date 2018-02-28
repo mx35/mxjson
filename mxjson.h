@@ -208,7 +208,7 @@ typedef bool (*mxjson_resize_cb)(mxjson_parser_t *parser,
  * - json: String containing the input JSON.
  *
  * - unparsed: Any remaining unparsed input. On success, unparsed is an
- *       empty sting. If unparsed is non-empty, it means that either invalid
+ *       empty string. If unparsed is non-empty, it means that either invalid
  *       JSON was encountered, or the tokens array was filled.
  *
  * - idx: Index for the final token to be processed/populated.
@@ -258,7 +258,7 @@ typedef bool (*mxjson_resize_cb)(mxjson_parser_t *parser,
  *     mxjson_idx_t last;
  *
  *     parent_index = <index for parent token>
- *     last = mxjson_next(&p, parent_index)
+ *     last = mxjson_next(&p, parent_index);
  *     index = mxjson_first(&p, parent_index);
  *
  *     while (index != last) {
@@ -459,9 +459,7 @@ static inline mxstr_t mxjson_token_string(mxjson_parser_t *p,
  * @return
  *   Indicates whether the parsing was successful. false is returned either
  *   when the JSON is invalid, or there were insufficient tokens in the
- *   parser context to complete the parsing. (Note: the result of the last
- *   parse operation can be inferred from the parser context by checking
- *   whether any unparsed data is present).
+ *   parser context to complete the parsing.
  */
 static inline bool mxjson_parse(mxjson_parser_t *p, mxstr_t json);
 
@@ -497,7 +495,7 @@ static inline void mxjson_free(mxjson_parser_t *p);
  * The simplest usage, which is sufficient for the majority of use cases
  * is:
  *
- *     mxjson_parser_p p;
+ *     mxjson_parser_t p;
  *     mxjson_init(p, 0, NULL, mxjson_resize);
  *
  * The following examples describe alternate ways of specifying the
@@ -1338,7 +1336,7 @@ mxjson_token_string (mxjson_parser_t *p,
         }
         break;
 
-                         case MXJSON_NUMBER:
+    case MXJSON_NUMBER:
     case MXJSON_STRING:
         str = mxstr((char *)&p->json.ptr[token->str], token->str_size);
 

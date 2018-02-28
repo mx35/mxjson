@@ -415,7 +415,9 @@ display_tree (mxjson_parser_t *p,
             printf("#─");
         }
 
-        printf(" ");
+        if (depth != 0) {
+            printf(" ");
+        }
 
         if (token->name != 0) {
             printf("%.*s", token->name_size, &p->json.ptr[token->name]);
@@ -610,18 +612,18 @@ int main (int argc, char **argv)
             assert(!ok);
             status = "Insufficient token memory";
 
-        } else if (!mxstr_empty(p.unparsed)) {
-            assert(!ok);
+        } else if (!ok) {
             status = "Invalid JSON";
 
         } else {
-            assert(ok);
             status = "Valid JSON";
         }
 
         parsed_len = p.json.len - p.unparsed.len;
         printf("Parsed: %lu / %lu bytes (%s)\n", parsed_len, json.len, status);
+    }
 
+    if (ok) {
         if (stats) {
             printf("\n");
             display_stats(&p);
